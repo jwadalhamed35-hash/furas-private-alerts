@@ -1,0 +1,7 @@
+{
+ "name":"furas-test-webhook",
+ "main":"worker.mjs",
+ "compatibility_date":"2026-11-21",
+ "durable_objects":{"bindings":[{"name":"TEST_JOBS","class_name":"TestJob"}]},
+ "migrations":[{"tag":"v1","new_sqlite_classes":["TestJob"]}]
+}
