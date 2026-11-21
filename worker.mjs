@@ -1,8 +1,9 @@
 import { DurableObject } from 'cloudflare:workers';
 const keyboard={keyboard:[[{text:'/test'}]],resize_keyboard:true,is_persistent:true};
-export function delaySeconds(random=crypto.getRandomValues(new Uint32Array(1))[0]) {
-  return 3+Math.floor((random/4294967296)*48);
+export function delaySeconds() {
+  return 3;
 }
+
 export function permitted(u,chat){
   const m=u?.message;
   return Number.isSafeInteger(u?.update_id)&&m?.chat?.type==='private'&&
