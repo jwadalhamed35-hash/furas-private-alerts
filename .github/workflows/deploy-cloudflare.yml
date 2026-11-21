@@ -1,0 +1,20 @@
+name: Deploy Telegram Webhook
+on: workflow_dispatch
+permissions:
+  contents: read
+concurrency:
+  group: deploy-telegram-webhook
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: de7ef17d5a01b886b01dbc2372e2ba92
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npx --yes wrangler@4 deploy --config wrangler.jsonc
