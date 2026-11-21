@@ -12,6 +12,18 @@ import paired_monitor as p
 
 PATH=Path('state/telegram_test_commands.json')
 
+KEYBOARD={'keyboard':[[{'text':'/test'}]],'resize_keyboard':True,
+          'is_persistent':True,'input_field_placeholder':'اضغط /test لإرسال رسالتين تجريبيتين'}
+
+def send_test(text):
+    data=m.post_json('https://api.telegram.org/bot'+m.required('TELEGRAM_BOT_TOKEN')+'/sendMessage',
+        {'chat_id':m.required('TELEGRAM_CHAT_ID'),'text':text,
+         'link_preview_options':{'is_disabled':True},'reply_markup':KEYBOARD})
+    if data.get('ok') is not True or not data.get('result',{}).get('message_id'):
+        raise m.MonitorError('Telegram did not accept the keyboard message')
+    return data['result']['message_id']
+
+
 def sample_messages():
     # Fixed, clearly labelled fixture. No opportunity lookup or registration.
     reference=datetime(2026,11,21,tzinfo=timezone.utc)
@@ -31,7 +43,7 @@ def is_test(update,recipient):
        str(message.get('from',{}).get('id'))==recipient and
        re.fullmatch(r'/test(?:@Furas_Private_20261120_bot)?',message.get('text','').strip(),re.I) is not None)
 
-def handle(updates,state,path,recipient,sender=p.send,delay=3.2):
+def handle(updates,state,path,recipient,sender=send_test,delay=3.2):
     handled=0
     for update in sorted(updates,key=lambda u:u['update_id']):
         identity=update['update_id']
@@ -52,8 +64,12 @@ def handle(updates,state,path,recipient,sender=p.send,delay=3.2):
         m.save_state(path,state)
     return handled
 
-def run(smoke=False):
+def run(smoke=False,install_button=False):
     recipient=m.required('TELEGRAM_CHAT_ID')
+    if install_button:
+        send_test('تمت إضافة زر /test. اضغطه لإرسال الأمر والحصول على رسالة شاملة وأخرى مختصرة تجريبيتين. يُفحص الأمر كل خمس دقائق وقد يتأخر الرد حسب جدولة GitHub.')
+        logging.info('Private /test keyboard accepted')
+        return
     if smoke:
         # The same authorized command handler, in a temporary checkpoint only.
         import tempfile
@@ -81,8 +97,9 @@ def run(smoke=False):
 
 if __name__=='__main__':
     logging.basicConfig(level=logging.INFO,format='%(levelname)s %(message)s')
-    parser=argparse.ArgumentParser();parser.add_argument('--smoke',action='store_true')
-    try:run(parser.parse_args().smoke)
+    parser=argparse.ArgumentParser();parser.add_argument('--smoke',action='store_true');parser.add_argument('--install-button',action='store_true')
+    try:
+        args=parser.parse_args();run(args.smoke,args.install_button)
     except Exception as error:
         logging.error('%s',str(error) if isinstance(error,m.MonitorError) else type(error).__name__)
         raise SystemExit(1)

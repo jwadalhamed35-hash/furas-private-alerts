@@ -1,10 +1,17 @@
 import unittest,tempfile,json
+from unittest.mock import patch
 from pathlib import Path
 import telegram_commands as c
 
 def update(identity=1,chat=123,text='/test',sender=123,kind='private'):
  return {'update_id':identity,'message':{'chat':{'id':chat,'type':kind},'from':{'id':sender},'text':text}}
 class Commands(unittest.TestCase):
+ def test_button_sends_supported_command(self):
+  self.assertEqual(c.KEYBOARD['keyboard'][0][0]['text'],'/test')
+  with patch.dict(c.m.os.environ,{'TELEGRAM_BOT_TOKEN':'test','TELEGRAM_CHAT_ID':'123'}), patch.object(c.m,'post_json',return_value={'ok':True,'result':{'message_id':1}}) as post:
+   c.send_test('test')
+   self.assertEqual(post.call_args.args[1]['reply_markup'],c.KEYBOARD)
+   self.assertEqual(post.call_args.args[1]['chat_id'],'123')
  def test_private_only_and_format(self):
   for u in [update(chat=999),update(sender=999),update(kind='group'),update(text='/testx')]:self.assertFalse(c.is_test(u,'123'))
   self.assertTrue(c.is_test(update(text='/test@Furas_Private_20261120_bot'),'123'))
