@@ -17,7 +17,7 @@ concurrency:
 jobs:
   monitor:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       NOTIFIER: telegram
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -28,18 +28,23 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python -m unittest discover -p test_monitor.py -v
+      - run: python -m unittest discover -p 'test*.py' -v
       - name: Scan or test
         env:
           RUN_MODE: ${{ inputs.mode || 'monitor' }}
-        run: python monitor.py --mode "$RUN_MODE"
+        run: |
+          if [ "$RUN_MODE" = "monitor" ]; then
+            python paired_monitor.py
+          else
+            python monitor.py --mode "$RUN_MODE"
+          fi
       - name: Save accepted notifications
         if: always()
         run: |
           if [ ! -d .git ]; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add state/sent.json
+          git add state/*.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Save Furas notification history'
           git pull --rebase origin "$GITHUB_REF_NAME"
@@ -49,5 +54,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: notification-state-recovery
-          path: state/sent.json
+          path: state/
           retention-days: 7
