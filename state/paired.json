@@ -478,13 +478,15 @@
     "Investment:01-26-006201-5005": {
       "number": 44,
       "object_id": 1775454,
-      "fingerprint": "a8d8c1a5678e0176cc79b0b9f44aa8d9898f073ac9080cdc98e80d7d845876a1:active",
+      "fingerprint": "a8d8c1a5678e0176cc79b0b9f44aa8d9898f073ac9080cdc98e80d7d845876a1:closed",
       "pending": null,
       "message_ids": [
         180,
-        181
+        181,
+        329,
+        330
       ],
-      "was_active": true
+      "was_active": false
     },
     "Investment:01-26-006201-7001": {
       "number": 45,
@@ -500,13 +502,15 @@
     "Investment:01-26-006201-7009": {
       "number": 46,
       "object_id": 1778233,
-      "fingerprint": "9da70c5fa6d53713182185734b622ed474d18125828495f2ef1445ce476565ca:active",
+      "fingerprint": "9da70c5fa6d53713182185734b622ed474d18125828495f2ef1445ce476565ca:closed",
       "pending": null,
       "message_ids": [
         184,
-        185
+        185,
+        331,
+        332
       ],
-      "was_active": true
+      "was_active": false
     },
     "Investment:01-26-006201-7010": {
       "number": 47,
