@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "next_number": 86,
+  "next_number": 88,
   "projects": {
     "Investment:01-23-004315-7": {
       "number": 1,
@@ -940,6 +940,28 @@
       "message_ids": [
         333,
         334
+      ],
+      "was_active": true
+    },
+    "Investment:01-26-004709-1001": {
+      "number": 86,
+      "object_id": 1772915,
+      "fingerprint": "011f754f33a2d8525e135b9f380f99a4b18b806bc72a6a05c60625c9167f017e:active",
+      "pending": null,
+      "message_ids": [
+        337,
+        338
+      ],
+      "was_active": true
+    },
+    "Investment:01-26-006103-24003": {
+      "number": 87,
+      "object_id": 1823204,
+      "fingerprint": "5b5eebdf4bf34e1691fca14faf78d3d75493845ec441a5e66a1f42fc5055803d:active",
+      "pending": null,
+      "message_ids": [
+        339,
+        340
       ],
       "was_active": true
     }
