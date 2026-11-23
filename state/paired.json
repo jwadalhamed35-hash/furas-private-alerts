@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "next_number": 85,
+  "next_number": 86,
   "projects": {
     "Investment:01-23-004315-7": {
       "number": 1,
@@ -889,13 +889,15 @@
     "Investment:06-26-18115-26006": {
       "number": 81,
       "object_id": 1798165,
-      "fingerprint": "cd46c040ae732c1146e70937ad13aa870e1b5c3b32edae68af886c5a61c2b9b3:active",
+      "fingerprint": "cd46c040ae732c1146e70937ad13aa870e1b5c3b32edae68af886c5a61c2b9b3:closed",
       "pending": null,
       "message_ids": [
         254,
-        255
+        255,
+        335,
+        336
       ],
-      "was_active": true
+      "was_active": false
     },
     "Investment:06-26-188680-5009": {
       "number": 82,
@@ -927,6 +929,17 @@
       "message_ids": [
         260,
         261
+      ],
+      "was_active": true
+    },
+    "Investment:01-26-010201-28001": {
+      "number": 85,
+      "object_id": 1811202,
+      "fingerprint": "533da07bf92f1bc4e60a188689c0471a043839e7f7cf33bf43796ca2d69d8ca1:active",
+      "pending": null,
+      "message_ids": [
+        333,
+        334
       ],
       "was_active": true
     }
