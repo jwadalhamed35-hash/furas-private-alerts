@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "next_number": 88,
+  "next_number": 89,
   "projects": {
     "Investment:01-23-004315-7": {
       "number": 1,
@@ -962,6 +962,17 @@
       "message_ids": [
         339,
         340
+      ],
+      "was_active": true
+    },
+    "Investment:01-26-008501-7001": {
+      "number": 88,
+      "object_id": 1823035,
+      "fingerprint": "ebf375bfc9bbf5a9202f876f3b2d91f55059c2e31f8fe8648462c80e76ccd293:active",
+      "pending": null,
+      "message_ids": [
+        341,
+        342
       ],
       "was_active": true
     }
