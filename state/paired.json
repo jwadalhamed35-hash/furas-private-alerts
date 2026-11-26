@@ -192,13 +192,15 @@
     "Investment:01-26-003001-39001": {
       "number": 18,
       "object_id": 1754261,
-      "fingerprint": "9696e113ad7e37fda4e78d3de9bf4a491c5977695a83035f1568fdcf50506935:active",
+      "fingerprint": "9696e113ad7e37fda4e78d3de9bf4a491c5977695a83035f1568fdcf50506935:closed",
       "pending": null,
       "message_ids": [
         128,
-        129
+        129,
+        343,
+        344
       ],
-      "was_active": true
+      "was_active": false
     },
     "Investment:01-26-003001-58001": {
       "number": 19,
